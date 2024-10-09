@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
-import { Header } from "./header";
 import RecoilContextProvider from "./recoil-provider";
 
 const geistSans = localFont({
@@ -38,7 +37,6 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <Header />
             {children}
           </ThemeProvider>
         </RecoilContextProvider>
