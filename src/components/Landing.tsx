@@ -2,7 +2,7 @@ import { WalletGenerator } from "./walletGenerator";
 
 export const Landing = () => {
   return (
-    <div>
+    <div className="">
       <WalletGenerator />
     </div>
   );
