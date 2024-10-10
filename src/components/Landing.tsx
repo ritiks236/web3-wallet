@@ -1,4 +1,4 @@
-import { WalletGenerator } from "./walletGenerator";
+import { WalletGenerator } from "./WalletGenerator";
 
 export const Landing = () => {
   return (
