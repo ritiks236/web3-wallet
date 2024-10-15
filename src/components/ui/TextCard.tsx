@@ -4,5 +4,9 @@ interface TextCardProps {
 }
 
 export const TextCard = ({ children }: TextCardProps) => {
-  return <div className="bg-gray-700 border rounded-md">{children}</div>;
+  return (
+    <div className="bg-gray-800 text-gray-400 p-4 border rounded-md">
+      {children}
+    </div>
+  );
 };
