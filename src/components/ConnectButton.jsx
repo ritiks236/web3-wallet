@@ -3,7 +3,6 @@
 import { componentStateAtom } from "@/store/atoms/componentState";
 import { Button } from "./ui/button";
 import { useSetRecoilState } from "recoil";
-import { cn } from "@/lib/utils";
 
 export const ConnectButton = () => {
   const setCurrentComponent = useSetRecoilState(componentStateAtom);

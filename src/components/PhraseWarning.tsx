@@ -7,9 +7,16 @@ import { TextCard } from "./ui/TextCard";
 import { LockKeyholeIcon, TriangleAlert } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
+import { useSeedPhrase } from "@/hooks/useSeedphrase";
 
 export const PhraseWarning = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const { generateSeedPhrase } = useSeedPhrase();
+
+  const nextHandler = () => {
+    generateSeedPhrase();
+    // TODO : Move next component logic
+  };
 
   return (
     <div className="m-10 flex flex-col relative gap-6 ">
@@ -46,14 +53,18 @@ export const PhraseWarning = () => {
         <div className="grid gap-1.5 leading-none">
           <label
             htmlFor="terms1"
-            className="absolute mr-20 cursor-pointer text-sm font-medium text-gray-400 tracking-tight text-primary/90 md:text-xl leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+            className="absolute mr-20 cursor-pointer text-sm font-medium text-gray-500 tracking-tight text-primary/90 md:text-xl leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
           >
             I understand that I am responsible for saving my secret recovery
             phrase, and that it is the only way to recover my wallet.
           </label>
         </div>
       </div>
-      <Button disabled={termsAccepted} className="mx-36 p-6 mt-20 text-lg">
+      <Button
+        disabled={!termsAccepted}
+        className="mx-36 p-6 mt-20 text-lg"
+        onClick={nextHandler}
+      >
         Next
       </Button>
     </div>
