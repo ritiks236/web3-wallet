@@ -8,14 +8,17 @@ import { LockKeyholeIcon, TriangleAlert } from "lucide-react";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { useSeedPhrase } from "@/hooks/useSeedphrase";
+import { useRecoilState } from "recoil";
+import { pageState } from "@/store/atoms/pageState";
 
 export const PhraseWarning = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const { generateSeedPhrase } = useSeedPhrase();
+  const [step, setStep] = useRecoilState(pageState);
 
   const nextHandler = () => {
     generateSeedPhrase();
-    // TODO : Move next component logic
+    setStep(step + 1);
   };
 
   return (

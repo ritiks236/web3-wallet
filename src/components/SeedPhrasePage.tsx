@@ -6,9 +6,16 @@ import { Text } from "./Text";
 import { Button } from "./ui/button";
 import { useState } from "react";
 import { SeedPhrase } from "./SeedPhrase";
+import { useRecoilState } from "recoil";
+import { pageState } from "@/store/atoms/pageState";
 
 export const SeedPhrasePage = () => {
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [step, setStep] = useRecoilState(pageState);
+
+  const nextHandler = () => {
+    setStep(step + 1);
+  };
 
   return (
     <div className="m-10 flex flex-col relative gap-6 ">
@@ -34,7 +41,11 @@ export const SeedPhrasePage = () => {
           </label>
         </div>
       </div>
-      <Button disabled={!termsAccepted} className="mx-16 p-6 mt-2 text-lg">
+      <Button
+        onClick={nextHandler}
+        disabled={!termsAccepted}
+        className="mx-16 p-6 mt-2 text-lg"
+      >
         Next
       </Button>
     </div>

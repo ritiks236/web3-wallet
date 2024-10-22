@@ -1,8 +1,19 @@
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { Heading } from "./Heading";
 import { Text } from "./Text";
 import { Button } from "./ui/button";
+import { pageState } from "@/store/atoms/pageState";
+import { selectChainAtom } from "@/store/atoms/selectChainAtom";
 
 export const SelectNetwork = () => {
+  const [step, setStep] = useRecoilState(pageState);
+  const setChain = useSetRecoilState(selectChainAtom);
+
+  const clickHandler = (value: number) => {
+    setChain(value);
+    setStep(step + 1);
+  };
+
   return (
     <div className="flex flex-col  gap-6 ">
       <Heading>Select Network</Heading>
@@ -11,12 +22,20 @@ export const SelectNetwork = () => {
         <Text>Solana and Ethereum</Text>
       </div>
       <div className="relative flex flex-col gap-3 pt-8">
-        <Button variant={"outline"} className="py-8">
+        <Button
+          onClick={() => clickHandler(501)}
+          variant={"outline"}
+          className="py-8"
+        >
           <span className="text-left text-2xl font-semibold text-primary/80">
             Solana
           </span>
         </Button>
-        <Button variant={"outline"} className="py-8">
+        <Button
+          onClick={() => clickHandler(44)}
+          variant={"outline"}
+          className="py-8"
+        >
           <span className="text-left text-2xl font-semibold text-primary/80">
             Ethereum
           </span>
