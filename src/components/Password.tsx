@@ -4,11 +4,11 @@ import { useState } from "react";
 import { PasswordInput } from "./ui/password-input";
 import { Checkbox } from "./ui/checkbox";
 import { Button } from "./ui/button";
-import { z } from "zod";
+import { useRecoilState } from "recoil";
+import { passwordAtom } from "@/store/atoms/passwordAtom";
 
 export const Password = () => {
-  const [password, setPassword] = useState("");
-  const [toggle, setToggle] = useState("");
+  const [password, setPassword] = useRecoilState(passwordAtom);
   const [termsAccepted, setTermsAccepted] = useState(false);
 
   return (
@@ -19,9 +19,18 @@ export const Password = () => {
           id="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          required
+          minLength={8}
         />
-        <PasswordInput placeholder={"Confirm Password"} id="confPassword" />
-        <div>{toggle}</div>
+        <PasswordInput
+          placeholder={"Confirm Password"}
+          id="confPassword"
+          onPaste={(e) => {
+            e.preventDefault();
+          }}
+          required
+          minLength={8}
+        />
       </div>
       <div className=" ml-24 items-top flex space-x-2">
         <Checkbox
