@@ -3,11 +3,11 @@ import { Heading } from "./Heading";
 import { Text } from "./Text";
 import { Button } from "./ui/button";
 import { pageState } from "@/store/atoms/pageState";
-import { selectChainAtom } from "@/store/atoms/selectChainAtom";
+import { pathTypeAtom } from "@/store/atoms/pathTypeAtom";
 
 export const SelectNetwork = () => {
   const [step, setStep] = useRecoilState(pageState);
-  const setChain = useSetRecoilState(selectChainAtom);
+  const setChain = useSetRecoilState(pathTypeAtom);
 
   const clickHandler = (value: number) => {
     setChain(value);
@@ -32,7 +32,7 @@ export const SelectNetwork = () => {
           </span>
         </Button>
         <Button
-          onClick={() => clickHandler(44)}
+          onClick={() => clickHandler(60)}
           variant={"outline"}
           className="py-8"
         >
