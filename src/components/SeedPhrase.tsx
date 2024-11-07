@@ -20,7 +20,7 @@ export const SeedPhrase = () => {
       onClick={copyClipboard}
       className="bg-gray-800 text-gray-400 border rounded-md cursor-pointer"
     >
-      <div className="m-3 p-4 max-w-80 border rounded-lg">
+      <div className="m-3 p-4 max-w-80 rounded-lg">
         <div className="grid grid-cols-3 gap-y-8 gap-x-40">
           {seedPhrase.map((seed, index) => (
             <Seed key={index} id={index} seed={seed} />

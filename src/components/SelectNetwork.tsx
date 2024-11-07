@@ -7,10 +7,10 @@ import { pathTypeAtom } from "@/store/atoms/pathTypeAtom";
 
 export const SelectNetwork = () => {
   const [step, setStep] = useRecoilState(pageState);
-  const setChain = useSetRecoilState(pathTypeAtom);
+  const setPathType = useSetRecoilState(pathTypeAtom);
 
   const clickHandler = (value: number) => {
-    setChain(value);
+    setPathType(value);
     setStep(step + 1);
   };
 

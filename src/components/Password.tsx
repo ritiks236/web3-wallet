@@ -4,14 +4,23 @@ import { useEffect, useState } from "react";
 import { PasswordInput } from "./ui/password-input";
 import { Checkbox } from "./ui/checkbox";
 import { Button } from "./ui/button";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { passwordAtom } from "@/store/atoms/passwordAtom";
+import { Wallet, walletAtom } from "@/store/atoms/walletAtom";
+import { createSolanaAccount } from "@/lib/createSolanaAccount";
+import { seedPhraseAtom } from "@/store/atoms/seedPhraseAtom";
+import { pathTypeAtom } from "@/store/atoms/pathTypeAtom";
+import { storeEncryptedWalletsAndMnemonic } from "@/lib/storeEncryptedWallets";
 
 export const Password = () => {
   const [password, setPassword] = useRecoilState(passwordAtom);
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [confPassword, setConfPassword] = useState("");
   const [isMatch, setIsMatch] = useState(true);
+  const [wallets, setWallets] = useRecoilState(walletAtom);
+  const mnemonicArr = useRecoilValue(seedPhraseAtom);
+  const pathType = useRecoilValue(pathTypeAtom);
+  const mnemonic = mnemonicArr.join("");
 
   useEffect(() => {
     if (confPassword) {
@@ -19,8 +28,13 @@ export const Password = () => {
     }
   }, [password, confPassword]);
 
-  const nextHandler = () => {
-    // TODO: Encrypt the SeedPhrase with Password and store in local storage
+  useEffect(() => {
+    const newWallet: Wallet = createSolanaAccount({ mnemonic, pathType });
+    setWallets([...wallets, newWallet]);
+  }, []);
+
+  const nextHandler = async () => {
+    await storeEncryptedWalletsAndMnemonic(wallets, mnemonicArr, password);
   };
 
   return (
